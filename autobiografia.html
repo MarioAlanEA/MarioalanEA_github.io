@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>autobiografía</title>
+</head>
+
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    .container {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    table {
+        width: 100%;
+    
+    }
+
+    button {
+        background: black;
+        cursor: pointer;
+        border: none;
+        padding: 16px 32px;
+        color: azure;
+        font-size: 24px;
+        font-weight: bold;
+        position: relative;
+        border-radius: 12px;
+        margin: 10px;
+    }
+
+    button:hover::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            45deg,
+            red,
+            blue,
+            deeppink,
+            blue,
+            red,
+            blue,
+            deeppink,
+            blue
+        );
+        background-size: 800%;
+        border-radius: 12px;
+        filter: blur(8px);
+        animation: glowing 20s linear infinite;
+    }
+
+    @keyframes glowing {
+        0% {
+            background-position: 0 0;
+        }
+        50% {
+            background-position: 400% 0;
+        }
+        100% {
+            background-position: 0 0;
+        }
+    }
+</style>
+<body>
+
+<div class="container">
+<table>
+    <tr>
+        <td>
+            <div class="container">
+                <a href="index.html"><button>inicio</button></a>
+                <a href="autobiografia.html"><button>autobiografía</button></a>
+                <a href="ejecicios.html"><button>ejercicios</button></a>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td style="height: 5px;"colspan= "3">
+            <h1 style="text-align: center;">biografia mario alan escalante anaya</h1>
+
+            <h2>Preescolar</h2>
+
+            <p> fui al kinder <b><i>Elena Arballo piñuelas jardín de niños</i></b>
+                no me acuerdo de mucho recuerdo que <ins>casi me caigo</ins> de la
+                cancha que estaba a <del>2 metros</del> me acuerdo tambien que 
+                <mark>mi abuelo me llevaba al kinder</mark> por que el kiner esta en san vicente
+                y a veces mi tia <small>mis papas estaban trabajando</small><blockquote>
+                </blockquote></p>
+            
+            <h2>primaria</h2>
+
+            <p> fui a la primaria <b><i>Alejandro c Iberri</i></b>
+                donde pase 6 años de mi vida, represente varias veces a mi escuela
+                en <ins>actividades deportivas donde obtuve el primer lugar en las preubas
+                donde participaba</ins>, recuerdo que siempre estaba en el cuadro de 
+                honor participaba tambien en actividades que representaban a la escuela a nivel
+                academico como en ingles o matematicas, nos dieron un curso de parte del itson
+                donde nos enseñaron a usar office, <mark>mi abuelo me seguia llevando a la escuela</mark> es un
+                recuerdo que nunca olvidare el despertar en la mañana para ir con mis abuelos 
+                que mi abuelo me haga hot cakes y un cafe para ir a la escuela y saliendo de la 
+                escuela me comprara cosas para comer, en la primaria <del>me lastime un tobillo muy feo</del>
+                pero aun asi represente a mi salon en una competencia de futbol cuando me gradue 
+                sentia que en las secundaria todo seria mucho mejor <small>pero no fue asi</small><blockquote>
+                </blockquote>
+            </p>
+            <h2>secundaria</h2>
+            <p>
+                la secundaria la curse en la escuela <b><i>Miguel Hidalgo y Costilla </i></b> donde estve 3 años
+                mi primer año en la secundaria fue normal muy bueno conoci a amigos que hasta la fecha los tengo
+                no se me dificulto el adaptarme a la secundaria deje de participar en cosas de la escuela 
+                todo iba perfecto pero <ins>lamentablemente un poco despues ya casi terminando segundo año</ins> llego una 
+                <del>pandemia</del> que nos obligo a hacer todo en casa que era me era muy complicado por que me distraía muy facil 
+                me era muy dificil el poner atencion a las clases teniendo en cuenta tambien que era una pandemia pues 
+                no era muy facil pero aun asi fue una experiencia dificil pero buena para valorar el ir a la escuela y 
+                socializar, me gradue con buenas calificaciones, tambien fue la etapa donde me <mark>empecé a cuidarme un poco solo</mark>
+                me empecé a ir solo en camión <small> dejando lado la etapa donde me llevaban </small><blockquote>
+                </blockquote>
+            </p>
+            <h2>Preparatoria</h2>
+            <p>
+                acutalmente estoy cursando la Preparatoria en <b><i>cobach jose maria maytorena tapia</i></b> donde <ins>el primer año lo seguimos cursando virtual</ins>
+                pero gracias a dios se empezo a volver a la normaildad, he pasado por varias cosas como que <mark>participe en la OSI 
+                (olimpiada sonorense de informatica)</mark> donde obtuve el quinto lugar, me reencontre con varias amistadades de la secundaria 
+                y hice nuevas amistades tambien hemos hecho una obra de teatro de la familia peluche y una representacion de una etnia sonorense <del>opatas</del>, se esta planeado
+                una ida a hermosillo junto a todo el grupo, estoy a meses de terminar de cursar la preparatiria 
+            </p>
+            <h2>Futuro en la Univeridad</h2>
+            <p>
+                <mark>Mi futuro en la Univeridad</mark> espero que sea bueno espero entrar a la <b><i>UNISON</i></b> donde espero quedar en la carrera que escogí, pues tambien con el favor de dios 
+                graduarme, <del>en cualquier</del> Univeridad que quede siempre <ins>tratare de aprender lo maximo </ins><blockquote>      
+                </blockquote>
+            </p>
+        </td>
+    </tr>
+</table>
+</div>
+</body>
+</html>
