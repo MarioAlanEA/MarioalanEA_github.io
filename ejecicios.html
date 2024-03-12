@@ -1,136 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ejercicio</title>
-</head>
-<style>
-    html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-    }
-
-    .container {
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    table {
-        width: 100%;
-        max-width: 1000px; 
-    }
-
-    button {
-        background: black;
-        cursor: pointer;
-        border: none;
-        padding: 16px 32px;
-        color: azure;
-        font-size: 24px;
-        font-weight: bold;
-        position: relative;
-        border-radius: 12px;
-        margin: 10px;
-    }
-
-    button:hover::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-            45deg,
-            red,
-            blue,
-            deeppink,
-            blue,
-            red,
-            blue,
-            deeppink,
-            blue
-        );
-        background-size: 800%;
-        border-radius: 12px;
-        filter: blur(8px);
-        animation: glowing 20s linear infinite;
-    }
-
-    @keyframes glowing {
-        0% {
-            background-position: 0 0;
-        }
-        50% {
-            background-position: 400% 0;
-        }
-        100% {
-            background-position: 0 0;
-        }
-    }
-</style>
-
-<div class="container" style="display: flex; flex-direction: column; align-items: center;">
-    <div style="margin-bottom: 20px;">
-        <a href="index.html"><button>inicio</button></a>
-        <a href="autobiografia.html"><button>autobiografía</button></a>
-        <a href="ejercicios.html"><button>ejercicios</button></a>
-    </div>
-    <h2 style="margin-bottom: 20px;">ejercicio 1</h2>
-    <table border="1px" style="margin: 0 auto;">
-        <tr>
-            <td>Soy</td>
-            <td></td>
-            <td>Del 601 Matutino</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td style="text-align: center;"><img src="img/gatito.jpg" width="200" height="200"></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>ALUMNO</td>
-            <td><a href="https://open.spotify.com/intl-es/album/2X6WyzpxY70eUn3lnewB7d?si=yz1X7vXtTHS5DXRwlDeRTw">Toma tu regalo</a></td>
-        </tr>
-    </table>
-    <h2 style="margin-bottom: 20px;">ejercicio 2</h2>
-    <table border="1px" style="margin: 0 auto;">
-        <tr>
-            <td><img src="img/circulo.jpg" alt="" width="100" height="100"></td>
-            <td rowspan="3">
-                <table style="width: 100%;" class="figuras">
-                    <tr>
-                        <td style="border: 3px solid; text-align: center;">
-                            <p>Figuras</p>
-                            <p>Geométricas</p>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-            <td><img src="img/luna.png" alt="" width="100" height="100"></td>
-            <td rowspan="3">
-                <table style="border: 3px solid; text-align: center;" class="figuras">
-                    <tr>
-                        <td><p>Figuras</p></td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td><img src="img/hexagono.png" alt="" width="100" height="100"></td>
-            <td><img src="img/estrella.png" alt="" width="100" height="100"></td>
-        </tr>
-        <tr>
-            <td><img src="img/triangulo.png" alt="" width="100" height="100"></td>
-            <td><img src="img/sol.jpg" alt="" width="100" height="100"></td>
-        </tr>
-    </table>
-</div>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ejercicio</title>
+        <link href="boostrap/css/bootstrap.min.css" rel="stylesheet">
+        <script src="boostrap/js/bootstrap.min.js"></script>
+        <style>
+            table {
+                border-collapse: collapse !important; 
+            }
+            table, th, td {
+                border: 1px solid black !important; 
+            }
+    
+            /* Estilos para el carrusel */
+            .carousel {
+                width: 100px; /* Ajusta el ancho para que se ajuste a la barra de navegación */
+                height: 100px; /* Ajusta la altura para que se ajuste a la barra de navegación */
+                position: relative;
+                overflow: hidden;
+            }
+    
+            .carousel img {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                animation: carousel 9s infinite;
+                opacity: 0;
+            }
+    
+            @keyframes carousel {
+                0% {opacity: 0;}
+                11.11% {opacity: 1;}
+                33.33% {opacity: 1;}
+                44.44% {opacity: 0;}
+                100% {opacity: 0;}
+            }
+    
+            .carousel img:nth-child(1) {animation-delay: 0s;}
+            .carousel img:nth-child(2) {animation-delay: 3s;}
+            .carousel img:nth-child(3) {animation-delay: 6s;}
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <!-- Carrusel automático reemplazando el texto "Navbar" -->
+                <div class="carousel navbar-brand">
+                    <img src="img/ima1.jpeg">
+                    <img src="img/ima2.jpeg">
+                    <img src="img/ima3.jpeg">
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" href="autobiografia.html">Autobiografia</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" href="ejecicios.html">Ejercicios</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" href="contacto.html">Contacto</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+        <div class="container" style="display: flex; flex-direction: column; align-items: center;">
+            <h2 style="margin-bottom: 20px;">ejercicio 1</h2>
+            <table border="1px">
+                <tr>
+                    <td>Soy</td>
+                    <td></td>
+                    <td>Del 601 Matutino</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td style="text-align: center;"><img src="img/gatito.jpg" width="200" height="200"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>ALUMNO</td>
+                    <td><a href="https://open.spotify.com/intl-es/album/2X6WyzpxY70eUn3lnewB7d?si=yz1X7vXtTHS5DXRwlDeRTw">Toma tu regalo</a></td>
+                </tr>
+            </table>
+            <h2 style="margin-bottom: 20px;">ejercicio 2</h2>
+            <table style="margin: 0 auto;">
+                <tr>
+                    <td><img src="img/circulo.jpg" alt="" width="100" height="100"></td>
+                    <td rowspan="3">
+                        <table style="width: 100%;" class="figuras">
+                            <tr>
+                                <td style="border: 3px solid; text-align: center;">
+                                    <p>Figuras</p>
+                                    <p>Geométricas</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td><img src="img/luna.png" alt="" width="100" height="100"></td>
+                    <td rowspan="3">
+                        <table style="border: 3px solid; text-align: center;" class="figuras">
+                            <tr>
+                                <td><p>Figuras</p></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="img/hexagono.png" alt="" width="100" height="100"></td>
+                    <td><img src="img/estrella.png" alt="" width="100" height="100"></td>
+                </tr>
+                <tr>
+                    <td><img src="img/triangulo.png" alt="" width="100" height="100"></td>
+                    <td><img src="img/sol.jpg" alt="" width="100" height="100"></td>
+                </tr>
+            </table>
+        </div>
+    </body>
 </html>
