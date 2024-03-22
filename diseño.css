@@ -1,0 +1,39 @@
+span {
+    color: #000000;
+}
+
+td.pieza {
+    background: url('albums/data.jpg') center center no-repeat;
+    transition: .3s ease-in-out;
+    -moz-transition: .3s ease-in-out;
+    -webkit-transition: .3s ease-in-out;
+    -o-transition: .3s ease-in-out;
+    cursor: pointer;
+}
+
+div#titulo {
+    color: #000000;
+    font-size: 30px;
+    font-weight: bold;
+    text-shadow: 1px 1px 8px #63f0d8, -1px -1px 8px #63f0d8, 1px -1px 8px #63f0d8, -1px 1px 8px #63f0d8;
+}
+
+#resultado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8fafa;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#resultado img {
+    width: 200px;
+    margin-right: 20px;
+}
+
+#resultado p {
+    font-size: 18px;
+    color: #333;
+    line-height: 1.6;
+}
