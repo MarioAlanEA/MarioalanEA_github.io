@@ -35,7 +35,7 @@
         .carousel img:nth-child(1) {animation-delay: 0s;}
         .carousel img:nth-child(2) {animation-delay: 3s;}
         .carousel img:nth-child(3) {animation-delay: 6s;}
-    </style>
+</style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -83,11 +83,13 @@
             <option value='25'>PASADISIMO DE DIFICIL</option>
             <option value='100'>DIABLO</option>
         </select>
-        <input type='button' id='mezclar' value='Mezclar' /> <!-- Cambiado 'barajar' por 'mezclar' -->
+        <button id='mezclar'>Mezclar</button> <!-- Cambiado a 'button' en lugar de 'input type="button"' -->
+        <label for="imageUpload" class="file-upload-label">sube tu propia imagen</label>
+        <input type="file" id="imageUpload" accept="image/*">
         <div><span>es un rompecabezas picale a una pieza y cambiala por otra no puede ser tan complicado, cuando ganes y quieres volver a jugar le das en mezclar y si le quieres cambiar de dificultad la cambias y le das en mezclar</span></div>
-    </div>
+        <div id="resultado" style="text-align: justify; margin-top: 30px;"></div>
+      </div>
   </div>
-  <div id="resultado" style="text-align: justify; margin-top: 30px;"></di>
   <script src="rompecabezas.js"></script>
 </body>
 </html>

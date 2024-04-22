@@ -37,3 +37,99 @@ div#titulo {
     color: #333;
     line-height: 1.6;
 }
+
+button {
+    background: black;
+    cursor: pointer;
+    border: none;
+    padding: 10px 20px; /* Ajustar el tamaño del padding */
+    color: azure;
+    font-size: 18px; /* Reducir el tamaño de la fuente */
+    font-weight: bold;
+    position: relative;
+    border-radius: 8px; /* Reducir el radio de la esquina */
+    margin-top: 10px; /* Agregar margen superior */
+    margin-bottom: 10px; /* Agregar margen inferior */
+    transition: background 0.3s ease; /* Agregado para suavizar la transición */
+}
+
+button:hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, red, blue, deeppink, blue, red, blue, deeppink, blue);
+    background-size: 800%;
+    border-radius: 8px;
+    filter: blur(8px);
+    animation: glowing 20s linear infinite;
+}
+
+@keyframes glowing {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+.file-upload {
+    position: relative;
+    display: inline-block;
+}
+
+.file-upload-label {
+    background: black;
+    cursor: pointer;
+    border: none;
+    padding: 10px 20px;
+    color: azure;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    transition: background 0.3s ease;
+}
+
+.file-upload-label:hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, red, blue, deeppink, blue, red, blue, deeppink, blue);
+    background-size: 800%;
+    border-radius: 8px;
+    filter: blur(8px);
+    animation: glowing 20s linear infinite;
+}
+
+@keyframes glowing {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
+/* Estilos para el input de tipo file, ocultar */
+input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
