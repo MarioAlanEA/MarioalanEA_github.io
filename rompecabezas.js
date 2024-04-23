@@ -1,32 +1,43 @@
-var select = false; // variable para seleccionar una pieza 
-var c = 'inc'; // cambia el fondo
+// CODIGO HECHO POR LUIS MIGUEL (el me dio las fuerzas para mejorarlo)
+
+var select = false; // Variable para seleccionar una pieza
+var c = 'inc'; // cambio de fondo 
 var pos_s = ''; // posicion de pieza
 var id_s = ''; // pieza seleccionada 
-var imageUrl = 'albums/data.jpg'; // imagen principal 
+var imageUrl = 'albums/data.jpg'; // data
 
 var rompecabezas = {
-    _arr_pos_r: new Array(), // arreglo posiciones correctas
-    _arr_pos_a: new Array(), // arreglo posiciones actuales
+    _arr_pos_r: [], // Arreglo posiciones correctas
+    _arr_pos_a: [], // Arreglo posiciones actuales
 
-    //mostrar el rompecabezas 
+    // rompecabezas.show
     _mostrar: function () {
+        // lavadora
         rompecabezas._arr_pos_r.length = 0;
+
+        // num piezas seleccionadas
         var piezas = rompecabezas._get('piezas').value;
+        
+        //tabla 
         var tb = document.createElement('table');
-        // tabla
         tb.border = 1;
         tb.align = 'center';
         tb.cellPadding = 0;
         tb.cellSpacing = 0;
+
+        // coordenadas de las piezas que no se miran
         var dp = document.createElement('div');
         dp.id = 'posiciones';
         dp.className = 'posic';
-        dp.style.display = 'none'; // Oculta las coordenadas
+        dp.style.display = 'none';
+
+        // tamaño pieza
         var ar = Math.sqrt(piezas);
-        var c = 0;
-        var tam_img = 300; // Tamaño de la imagen 
+        var tam_img = 300; // Tamaño de la imagen principal
         var pos_img = tam_img / ar;
 
+        // crea las piezas 
+        var c = 0; // Contador de piezas
         for (var fil = 1; fil <= ar; fil++) {
             var tr = document.createElement('tr');
             for (var cel = 1; cel <= ar; cel++) {
@@ -36,25 +47,38 @@ var rompecabezas = {
                 td.id = 'pos_' + c;
                 td.style.width = pos_img + 'px';
                 td.style.height = pos_img + 'px';
+
+                // mostrar las coordenadas de fondo no se ve otra vez
                 var dbp = document.createElement('div');
                 dbp.id = 'val_bp_' + c;
-                var pX = -(pos_img * (cel - 1)) + 'px'; // x 
-                var pY = -(pos_img * (fil - 1)) + 'px'; // y
-                var p = pX + ' ' + pY; // x + y 
+
+                // Calcular la posición de fondo para la imagen principal
+                var pX = -(pos_img * (cel - 1)) + 'px';
+                var pY = -(pos_img * (fil - 1)) + 'px';
+                var p = pX + ' ' + pY;
                 td.style.backgroundImage = 'url(' + imageUrl + ')';
                 td.style.backgroundPosition = p;
+
+                // la posición al arreglo de posiciones correctas
                 rompecabezas._arr_pos_r.push(p);
+
                 dbp.innerHTML = p;
                 dp.appendChild(dbp);
+
+                // evento del clik para cambiar las piezas
                 td.onclick = function () {
                     rompecabezas._cambiaBGP(this.id);
                     rompecabezas._compruebaFin();
                 }
+
+                // Agregar la pieza a la fila de la tabla
                 tr.appendChild(td);
             }
+            // Agregar la fila a la tabla
             tb.appendChild(tr);
         }
 
+        // Insertar la tabla y el div de posiciones
         if (!rompecabezas._get('div_content')) {
             var cont = document.createElement('div');
             cont.id = 'div_content';
@@ -71,48 +95,38 @@ var rompecabezas = {
         }
     },
 
-    // funcion de mezclar muejejejejejjejejeje
+    // Función para mezclar las piezas del rompecabezas
     _mezclar: function () {
-        var num_alt = null;
-        var arr = new Array();
-        var resp = 'no';
-        var i = -1;
-        var repite = 'no';
-        var pie = parseInt(rompecabezas._get('piezas').value);
-        var pie1 = pie + 1;
-        while (arr.length < pie) {
-            repite = 'no';
-            num_alt = Math.floor(Math.random() * pie1);
-            if (num_alt != 0) {
-                if (arr.length == 0) {
-                    i++;
-                    arr[i] = num_alt;
-                } else {
-                    for (j = 0; j <= arr.length - 1; j++) {
-                        if (arr[j] == num_alt) {
-                            repite = 'si';
-                        }
-                    }
-                    if (repite != 'si') {
-                        i++;
-                        arr[i] = num_alt;
-                    }
-                }
-            }
-        }
-        // ciclo licuadora 
-        var id = 0;
-        for (k = 0; k <= arr.length - 1; k++) {
-            id = k - (-1);
-            rompecabezas._get('pos_' + id).style.backgroundPosition = rompecabezas._get('val_bp_' + arr[k]).innerHTML;
+        var piezas = rompecabezas._get('piezas').value;
+        var piezasTotal = parseInt(piezas);
+        var piezasOrdenadas = Array.from(Array(piezasTotal).keys());
+
+        // Mezclar aleatoriamente
+        var piezasMezcladas = piezasOrdenadas.sort(() => Math.random() - 0.5);
+
+        // Actualizar la posición de cada pieza
+        piezasMezcladas.forEach(function (num, index) {
+            var id = index + 1;
+            rompecabezas._get('pos_' + id).style.backgroundPosition = rompecabezas._get('val_bp_' + (num + 1)).innerHTML;
+        });
+
+        // Restablecer 
+        select = false;
+
+        // Desbloquear el movimiento de las piezas
+        for (var j = 1; j <= piezasTotal; j++) {
+            rompecabezas._get('pos_' + j).onclick = function () {
+                rompecabezas._cambiaBGP(this.id);
+                rompecabezas._compruebaFin();
+            };
         }
 
-        // limpia con luis miguel 
+        // licuadora
         var resultadoDiv = rompecabezas._get('resultado');
         resultadoDiv.innerHTML = '';
     },
 
-    // Método para cambiar el fondo de una pieza al hacer clic
+    // neto.dios
     _cambiaBGP: function (id) {
         if (select == false) {
             pos_s = rompecabezas._get(id).style.backgroundPosition;
@@ -123,7 +137,6 @@ var rompecabezas = {
             var pos_n = rompecabezas._get(id).style.backgroundPosition;
             var id_n = id;
             c = 'com';
-            select = false;
         }
 
         if (c == 'com') {
@@ -131,79 +144,84 @@ var rompecabezas = {
             rompecabezas._get(id_s).style.backgroundPosition = pos_n;
             c = 'inc';
             rompecabezas._get(id_s).style.boxShadow = '';
+            select = false;
         }
     },
 
-    // Método para comprobar si se ha completado el rompecabezas
-_compruebaFin: function () {
-    var pie = parseInt(rompecabezas._get('piezas').value);
-    var fin = false;
-    rompecabezas._arr_pos_a.length = 0;
-    for (var i = 1; i <= pie; i++) {
-        rompecabezas._arr_pos_a.push(rompecabezas._get('pos_' + i).style.backgroundPosition);
-    }
-    for (var j = 0; j < rompecabezas._arr_pos_r.length; j++) {
-        if (rompecabezas._arr_pos_r[j] != rompecabezas._arr_pos_a[j]) {
-            fin = false;
-            break;
-        } else {
-            fin = true;
+    // esta completo? i ron nouw esto lo checa
+    _compruebaFin: function () {
+        var piezas = parseInt(rompecabezas._get('piezas').value);
+        var fin = true;
+
+        // esta correcto? i ron nouw esto lo checa
+        for (var i = 1; i <= piezas; i++) {
+            if (rompecabezas._get('pos_' + i).style.backgroundPosition != rompecabezas._get('val_bp_' + i).innerHTML) {
+                fin = false;
+                break;
+            }
         }
-    }
 
-    if (fin) {
-        var resultadoDiv = rompecabezas._get('resultado');
-        resultadoDiv.innerHTML = ''; // escoba 
+        // aqui va el texto cuando lo termines
+        if (fin) {
+            var resultadoDiv = rompecabezas._get('resultado');
+            resultadoDiv.innerHTML = '';
 
-        var texto = document.createElement('p');
-        texto.textContent = 'Felicidades, lo resolviste :)'; //cambialo 
-        texto.style.textAlign = 'center';
-        resultadoDiv.appendChild(texto);
-    }
-},
+            var texto = document.createElement('p');
+            texto.textContent = 'Felicidades, lo resolviste :)'; // cambia ese texto por favor no se te olvide
+            texto.style.textAlign = 'center';
+            resultadoDiv.appendChild(texto);
 
-    // Método para obtener un elemento por su ID
-    _get: function (id) {
-        return document.getElementById(id);
+            // bloqueau las piezaas
+            for (var j = 1; j <= piezas; j++) {
+                rompecabezas._get('pos_' + j).onclick = null;
+            }
+        }
     },
 
-    // funcion donde tu puedes subir tu imagen
+    // esta funcion me hizo pegarme un tiro pero es para que los que juegen puedan subir su imagen
     _cargarImagen: function (event) {
         var file = event.target.files[0];
         var reader = new FileReader();
 
         reader.onload = function (readerEvent) {
-            var img = new Image(); //cambia la original por la nueva
+            var img = new Image();
             img.src = readerEvent.target.result;
 
             img.onload = function () {
                 var canvas = document.createElement('canvas');
                 var ctx = canvas.getContext('2d');
 
-                // estatura 
+                //tamaño de la imagen subida
                 canvas.width = 300;
                 canvas.height = 300;
 
-                // Dibuja la imagen en el canvas con el tamaño ajustado
+                //SUAVE COMO ME MATA TU MIRADA 
                 ctx.drawImage(img, 0, 0, 300, 300);
 
-                // cambia la ruta de la img
+                //cambia la ruta de la img original
                 imageUrl = canvas.toDataURL('image/png');
 
-                //lo pasa al rompecabeza
+                // mezcla y enseña la new imagen
                 rompecabezas._mostrar();
                 rompecabezas._mezclar();
             };
         };
 
+        // CUANDO CALIENTA EL SOL AQUI EN LA PLAYAAA
         reader.readAsDataURL(file);
+    },
+
+    // nueva id de la imagem
+    _get: function (id) {
+        return document.getElementById(id);
     }
 };
 
 window.onload = function () {
-    rompecabezas._mostrar(); // Mostrar
-    rompecabezas._mezclar(); // Mezclar
-    // Configuración de eventos
+    rompecabezas._mostrar(); // en cuanto entras enseña 
+    rompecabezas._mezclar(); // hace lo mismo pero mezcla
+
+    //NO SE TUUUUUUUU PERO YOOOOOOO TE BUSCO EN CADA AMANECEEEEEER *llora*
     rompecabezas._get('piezas').onchange = function () {
         rompecabezas._mostrar();
     };
@@ -211,7 +229,96 @@ window.onload = function () {
         rompecabezas._mezclar();
     };
 
-    //  carga de imagen
+    //esto hace que cargue la imagen del que la subio
     var imageUpload = document.getElementById('imageUpload');
     imageUpload.addEventListener('change', rompecabezas._cargarImagen);
 };
+
+//denme dinero para ir a ver a luis miguel por favor
+
+//No sé qué está pasando
+//Que todo está al revés
+//Que tú ya no me besas como ayer
+//Que anoche en la playa
+//No me dejaste amarte
+//Algo entre nosotros no va bien
+//No culpes a la noche
+//No culpes a la playa
+//No culpes a la lluvia
+//Será que no me amas
+//No culpes a la noche
+//No culpes a la playa
+//No culpes a la lluvia
+//Será que no me amas
+//No busques más disculpas
+//No siento tus caricias
+//Ya no eres la misma que yo amé
+//Te veo tan distante
+//Te siento tan distinta
+//Pues hay dentro de ti otra mujer
+//No culpes a la noche
+//No culpes a la playa
+//No culpes a la lluvia
+//Será que no me amas
+//No culpes a la noche
+//No culpes a la playa
+//No culpes a la lluvia
+//Será que no me amas
+//Ya no sé, ya no sé, ya no sé qué va a pasar
+//Ya no sé, ya no sé, ya no sé qué voy a hacer
+//Ya no sé, ya no sé, ya no sé qué va a pasar
+//Ya no sé, ya no sé, ya no sé qué voy a hacer
+//Noche
+//No culpes a la playa
+//No culpes a la lluvia
+//Será que no me amas
+//No culpes a la noche
+//No culpes a la playa
+//No culpes a la lluvia
+//Será que no me amas
+//No sé qué está pasando
+//Que todo está al revés
+//Pero ya no lucho, como ves
+//Ayer no te importaba
+//Amar bajo la lluvia
+//Hoy no te divierte, ya lo sé
+//No culpes a la noche
+//No culpes a la playa
+//No culpes a la lluvia
+//Será que no me amas
+//No culpes a la noche
+//No culpes a la playa
+//No culpes a la lluvia
+//Será que no me amas
+//No culpes a la noche
+//Playa
+//No culpes a la lluvia
+//Será que no me amas, no, no, no
+//(Noche)
+//No culpes a la (Playa)
+//No culpes a la (Lluvia)
+//Será que no me (Amas)
+//(Noche)
+//(Playa)
+//(Lluvia)
+//(Amas)
+//No culpes a la noche
+//No culpes a la playa
+//No culpes a la lluvia
+//Será que no me amas, no, no, no
+//(Noche) No culpes a la noche
+//(Playa) No culpes a la playa
+//(Lluvia) No culpes a la lluvia
+//(Amas) No, no, no
+//(Noche) No culpes a la
+//(Playa) No culpes a la
+//(Lluvia) Será que no me amas
+//(Amas) No, no, no
+//(Noche)
+//(Playa)
+//(Lluvia)
+//(Amas)
+//(Noche)
+//(Playa)
+//(Lluvia)
+//(Amas)
