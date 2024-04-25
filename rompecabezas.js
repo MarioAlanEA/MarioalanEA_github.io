@@ -5,6 +5,8 @@ var c = 'inc'; // cambio de fondo
 var pos_s = ''; // posicion de pieza
 var id_s = ''; // pieza seleccionada 
 var imageUrl = 'albums/data.jpg'; // data
+var musicaReproduciendo = false; // Variable para controlar la reproducción de música
+var audio; // Variable para la musica
 
 var rompecabezas = {
     _arr_pos_r: [], // Arreglo posiciones correctas
@@ -121,12 +123,15 @@ var rompecabezas = {
             };
         }
 
+        // Detener la música si se está reproduciendo
+        rompecabezas._detenerMusica();
+        
         // licuadora
         var resultadoDiv = rompecabezas._get('resultado');
         resultadoDiv.innerHTML = '';
     },
 
-    // neto.dios
+    // neto.dios cambia fondo pieza
     _cambiaBGP: function (id) {
         if (select == false) {
             pos_s = rompecabezas._get(id).style.backgroundPosition;
@@ -175,10 +180,13 @@ var rompecabezas = {
             for (var j = 1; j <= piezas; j++) {
                 rompecabezas._get('pos_' + j).onclick = null;
             }
+
+            // Reproducir la canción si no se está reproduciendo
+            rompecabezas._reproducirMusica();
         }
     },
 
-    // esta funcion me hizo pegarme un tiro pero es para que los que juegen puedan subir su imagen
+    // Función para cargar una nueva imagen
     _cargarImagen: function (event) {
         var file = event.target.files[0];
         var reader = new FileReader();
@@ -201,7 +209,7 @@ var rompecabezas = {
                 //cambia la ruta de la img original
                 imageUrl = canvas.toDataURL('image/png');
 
-                // mezcla y enseña la new imagen
+                // mezcla y enseña la nueva imagen
                 rompecabezas._mostrar();
                 rompecabezas._mezclar();
             };
@@ -211,9 +219,26 @@ var rompecabezas = {
         reader.readAsDataURL(file);
     },
 
-    // nueva id de la imagem
     _get: function (id) {
         return document.getElementById(id);
+    },
+
+    // Función para reproducir la música
+    _reproducirMusica: function() {
+        if (!musicaReproduciendo) {
+            audio = new Audio('musica/luismi.mp3'); //aqui la cancion
+            audio.loop = true; // repetir la musica
+            audio.play(); //play
+            musicaReproduciendo = true; // se reproduce la musica
+        }
+    },
+
+    // musica stop
+    _detenerMusica: function() {
+        if (musicaReproduciendo) {
+            audio.pause();
+            musicaReproduciendo = false;
+        }
     }
 };
 
