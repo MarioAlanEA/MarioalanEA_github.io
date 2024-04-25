@@ -5,7 +5,7 @@ var c = 'inc'; // cambio de fondo
 var pos_s = ''; // posicion de pieza
 var id_s = ''; // pieza seleccionada 
 var imageUrl = 'albums/data.jpg'; // data
-var referenciaUrl = 'albums/data.jpg'; //imagen de referencia
+var referenciaUrl = 'albums/data.jpg'; // imagen de referencia
 var musicaReproduciendo = false; // Variable para controlar la reproducción de música
 var audio; // Variable para la musica
 
@@ -227,11 +227,11 @@ var rompecabezas = {
                 imageUrl = canvas.toDataURL('image/png');
 
                 // Actualizar la imagen original al lado del rompecabezas
-                var imagenOriginal = document.createElement('img');
+                var imagenOriginal = document.querySelector('#div_content img');
                 imagenOriginal.src = imageUrl;
-                imagenOriginal.style.width = '150px'; // Tamaño de la imagen original
-                imagenOriginal.style.marginLeft = '20px'; // Espacio entre la imagen original y el rompecabezas
-                document.body.insertBefore(imagenOriginal, rompecabezas._get('div_content')); // Insertar la imagen original antes del rompecabezas
+
+                // Actualizar la imagen de referencia
+                referenciaUrl = imageUrl;
 
                 // mezcla y enseña la nueva imagen
                 rompecabezas._mostrar();
