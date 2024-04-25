@@ -5,6 +5,7 @@ var c = 'inc'; // cambio de fondo
 var pos_s = ''; // posicion de pieza
 var id_s = ''; // pieza seleccionada 
 var imageUrl = 'albums/data.jpg'; // data
+var referenciaUrl = 'albums/data.jpg'; //imagen de referencia
 var musicaReproduciendo = false; // Variable para controlar la reproducción de música
 var audio; // Variable para la musica
 
@@ -84,11 +85,27 @@ var rompecabezas = {
         if (!rompecabezas._get('div_content')) {
             var cont = document.createElement('div');
             cont.id = 'div_content';
+
+            // Agregar imagen de referencia
+            var imagenReferencia = document.createElement('img');
+            imagenReferencia.src = referenciaUrl;
+            imagenReferencia.style.width = '150px';
+            imagenReferencia.style.marginLeft = '20px';
+            cont.appendChild(imagenReferencia);
+
             cont.appendChild(tb);
             cont.appendChild(dp);
             document.body.appendChild(cont);
         } else {
             rompecabezas._get('div_content').innerHTML = '';
+
+            // Agregar imagen de referencia
+            var imagenReferencia = document.createElement('img');
+            imagenReferencia.src = referenciaUrl;
+            imagenReferencia.style.width = '150px';
+            imagenReferencia.style.marginLeft = '20px';
+            rompecabezas._get('div_content').appendChild(imagenReferencia);
+
             rompecabezas._get('div_content').appendChild(tb);
             rompecabezas._get('div_content').appendChild(dp);
             rompecabezas._get('posiciones').removeClass('posic');
@@ -209,6 +226,13 @@ var rompecabezas = {
                 //cambia la ruta de la img original
                 imageUrl = canvas.toDataURL('image/png');
 
+                // Actualizar la imagen original al lado del rompecabezas
+                var imagenOriginal = document.createElement('img');
+                imagenOriginal.src = imageUrl;
+                imagenOriginal.style.width = '150px'; // Tamaño de la imagen original
+                imagenOriginal.style.marginLeft = '20px'; // Espacio entre la imagen original y el rompecabezas
+                document.body.insertBefore(imagenOriginal, rompecabezas._get('div_content')); // Insertar la imagen original antes del rompecabezas
+
                 // mezcla y enseña la nueva imagen
                 rompecabezas._mostrar();
                 rompecabezas._mezclar();
@@ -257,8 +281,7 @@ window.onload = function () {
     //esto hace que cargue la imagen del que la subio
     var imageUpload = document.getElementById('imageUpload');
     imageUpload.addEventListener('change', rompecabezas._cargarImagen);
-};
-
+}; 
 //denme dinero para ir a ver a luis miguel por favor
 
 //No sé qué está pasando
